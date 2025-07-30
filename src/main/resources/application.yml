@@ -1,0 +1,66 @@
+# Spring配置
+spring:
+  profiles:
+    active: dev  # 激活名为"dev"的Profile，这通常意味着将使用开发环境的配置
+
+  # 应用配置部分
+  application:
+    name: material-management  # 应用的名称，通常用于日志、监控等场景，以标识当前运行的应用
+
+  thymeleaf:
+    mode: HTML5
+    #编码 可不用配置
+    encoding: UTF-8
+    #开发配置为false,避免修改模板还要重启服务器
+    cache: false
+    #配置模板路径，默认是templates，可以不用配置
+    prefix: classpath:/page/
+    suffix: .html
+    servlet:
+      content-type: text/html
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: false
+
+knife4j:
+  # 开启增强配置
+  enable: true
+  #开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: true
+    # Basic认证用户名
+    username: admin
+    # Basic认证密码
+    password: 123456
+
+# Swagger配置
+swagger:
+  # 是否开启swagger
+  enabled: true
+  # 请求前缀
+  pathMapping: /
+
+
+
+# 日志配置部分
+logging:
+  # 配置不同包或类的日志级别
+  level:
+    # Spring框架的日志级别设置为INFO，这将记录框架的启动信息、Bean的创建等
+    org.springframework: info
+    # Hibernate框架的日志级别也设置为INFO，记录Hibernate的SQL语句、事务管理等
+    org.hibernate: info
+    # Hibernate的SQL日志级别设置为INFO，将详细记录Hibernate执行的SQL语句
+    org.hibernate.sql: info
+    # 设置包的应用日志级别为INFO
+    com.lot.acquisition:
+    # 打印 MyBatis-Plus日志
+    com.baomidou.mybatisplus: info
+
+
+  # 注释掉的配置，指定了日志配置文件的位置
+  # 如果需要自定义日志配置（如日志格式、输出位置等），可以取消注释并指定logback-spring.xml文件的位置
+  # 通常，logback-spring.xml文件会放在classpath下（如src/main/resources目录）
+  # config: classpath:logback-spring.xml  # 注释掉表示不使用此配置

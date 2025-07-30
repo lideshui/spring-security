@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>依斯倍物料匹配工具</title>
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/data-overview.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/gateway.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/device.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/template.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/message.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/variable.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/quartz.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/cache.css" />
+    <link rel="stylesheet" type="text/css" href="/css/page/mqtt.css" />
+    <div th:include="common/head :: head"></div>
+</head>
+
+<body>
+<div id="vue">
+    <el-container class="layout-container">
+        <el-aside class="left-aside">
+            <el-header class="left-header">
+                <div style="display: flex">
+                    <img src="/img/cps.png">
+                    <span>物料匹配工具</span>
+                </div>
+            </el-header>
+            <el-menu class="left-menu" :default-openeds="openedList" @select="handleSelect" :unique-opened="true">
+                <el-menu-item index="1">
+                    <i class="el-icon-s-data"></i><span slot="title">数据概览</span>
+                </el-menu-item>
+                <el-menu-item index="2">
+                    <i class="el-icon-s-grid"></i><span slot="title">物料管理</span>
+                </el-menu-item>
+                <el-menu-item index="3">
+                    <i class="el-icon-s-order"></i><span slot="title">文件解析</span>
+                </el-menu-item>
+                <el-menu-item index="4">
+                    <i class="el-icon-s-comment"></i><span slot="title">物料记录</span>
+                </el-menu-item>
+
+<!--                <el-submenu index="4">-->
+<!--                    <template slot="title"><i class="el-icon-s-order"></i>报文管理</template>-->
+<!--                    <el-menu-item index="4-1" class="nav-second-title">报文列表</el-menu-item>-->
+<!--                    <el-menu-item index="4-2" class="nav-second-title">变量列表</el-menu-item>-->
+<!--                </el-submenu>-->
+<!--                <el-submenu index="5">-->
+<!--                    <template slot="title"><i class="el-icon-message-solid"></i>定时任务</template>-->
+<!--                    <el-menu-item index="5-1" class="nav-second-title">任务列表</el-menu-item>-->
+<!--                </el-submenu>-->
+<!--                <el-submenu index="6">-->
+<!--                    <template slot="title"><i class="el-icon-s-grid"></i>缓存管理</template>-->
+<!--                    <el-menu-item index="6-1" class="nav-second-title">缓存列表</el-menu-item>-->
+<!--                </el-submenu>-->
+<!--                <el-submenu index="7">-->
+<!--                    <template slot="title"><i class="el-icon-s-comment"></i>消息队列</template>-->
+<!--                    <el-menu-item index="7-1" class="nav-second-title">MQTT推送策略</el-menu-item>-->
+<!--                    <el-menu-item index="7-2" class="nav-second-title">MQTT消息记录</el-menu-item>-->
+<!--                </el-submenu>-->
+<!--                <el-submenu index="8">-->
+<!--                    <template slot="title"><i class="el-icon-s-claim"></i>事件管理</template>-->
+<!--                    <el-menu-item index="7-1" class="nav-second-title">事件列表</el-menu-item>-->
+<!--                </el-submenu>-->
+            </el-menu>
+        </el-aside>
+
+        <el-container>
+            <el-header class="top-header">
+                <span>已登录</span>
+                <el-dropdown>
+                    <i class="el-icon-setting" style="margin-left: 15px; color: #e4e3e3"></i>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item><span @click="logout">退出</span></el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </el-header>
+            <el-main class="main-container">
+                <el-card class="box-card">
+                    <component :is="currentComponent" :data="propsData" @change-component="handleComponentChange"></component>
+                </el-card>
+            </el-main>
+        </el-container>
+    </el-container>
+</div>
+
+<!-- 定义Vue组件 -->
+<!-- 概览 -->
+<script type="text/javascript" src="/component/DataOverview.js"></script>
+<!-- 物料管理 -->
+<script type="text/javascript" src="/component/material/MaterialList.js"></script>
+<script type="text/javascript" src="/component/material/MaterialShow.js"></script>
+<script type="text/javascript" src="/component/material/MaterialCreate.js"></script>
+<script type="text/javascript" src="/component/material/MaterialEdit.js"></script>
+<!-- 解析管理 -->
+<script type="text/javascript" src="/component/analysis/AnalysisList.js"></script>
+<script type="text/javascript" src="/component/analysis/AnalysisShow.js"></script>
+<script type="text/javascript" src="/component/analysis/AnalysisDetail.js"></script>
+<!-- 物料记录 -->
+<script type="text/javascript" src="/component/purchase/PurchaseList.js"></script>
+<script type="text/javascript" src="/component/purchase/PurchaseShow.js"></script>
+<script type="text/javascript" src="/component/purchase/PurchaseCreate.js"></script>
+<script type="text/javascript" src="/component/purchase/PurchaseEdit.js"></script>
+
+
+<!--&lt;!&ndash; 网关管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/gateway/GatewayList.js"></script>-->
+<!--<script type="text/javascript" src="/component/gateway/GatewayShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/gateway/GatewayCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/gateway/GatewayEdit.js"></script>-->
+<!--<script type="text/javascript" src="/component/gateway/AnalyzeRecordList.js"></script>-->
+<!--<script type="text/javascript" src="/component/gateway/AnalyzeRecordShow.js"></script>-->
+<!--&lt;!&ndash; 设备管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/device/DeviceList.js"></script>-->
+<!--<script type="text/javascript" src="/component/device/DeviceShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/device/DeviceCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/device/DeviceEdit.js"></script>-->
+<!--&lt;!&ndash; 模板管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/template/TemplateList.js"></script>-->
+<!--<script type="text/javascript" src="/component/template/TemplateShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/template/TemplateCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/template/TemplateEdit.js"></script>-->
+<!--&lt;!&ndash; 报文管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/message/MessageList.js"></script>-->
+<!--<script type="text/javascript" src="/component/message/MessageShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/message/MessageCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/message/MessageEdit.js"></script>-->
+<!--&lt;!&ndash; 变量管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/variable/VariableList.js"></script>-->
+<!--<script type="text/javascript" src="/component/variable/VariableShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/variable/VariableCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/variable/VariableEdit.js"></script>-->
+<!--&lt;!&ndash; 定时任务管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/quartz/QuartzList.js"></script>-->
+<!--<script type="text/javascript" src="/component/quartz/QuartzShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/quartz/QuartzCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/quartz/QuartzEdit.js"></script>-->
+<!--<script type="text/javascript" src="/component/quartz/QuartzCronGenerator.js"></script>-->
+<!--&lt;!&ndash; 缓存管理 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/cache/CacheList.js"></script>-->
+<!--<script type="text/javascript" src="/component/cache/CacheShow.js"></script>-->
+<!--&lt;!&ndash; MQTT消息队列 &ndash;&gt;-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttPolicyList.js"></script>-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttPolicyShow.js"></script>-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttPolicyCreate.js"></script>-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttPolicyEdit.js"></script>-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttRecordList.js"></script>-->
+<!--<script type="text/javascript" src="/component/mqtt/MqttRecordShow.js"></script>-->
+
+<!-- 创建当前页Vue对象 -->
+<script th:inline="javascript">
+    let item = new Vue({
+        el: '#vue',
+        data: {
+            currentComponent: 'data-overview', // 当前显示的组件名称
+            propsData: {}, // 子组件传参
+            openedList: [], // 初始展开的菜单索引
+            componentMap: {
+                '1': 'data-overview',   // 数据概览
+                '2': 'material-list',  // 物料列表
+                '3': 'analysis-list',   // 解析列表
+                '4': 'purchase-list',   // 采购列表
+                // '4-1': 'message-list', // 模板报文
+                // '4-2': 'variable-list', // 模板变量
+                // '5-1': 'quartz-list', // 定时任务管理
+                // '6-1': 'cache-list', // 缓存管理
+                // '7-1': 'mqtt-policy-list', // MQTT推送策略
+                // '7-2': 'mqtt-record-list', // MQTT消息记录
+            }
+        },
+        methods: {
+            // 菜单事件
+            handleSelect(index) {
+                // 更新当前组件
+                this.currentComponent = this.componentMap[index] || 'data-overview';
+                // 更新展开的菜单状态
+                if (index.includes('-')) {
+                    const parentIndex = index.split('-')[0];
+                    // 如果父级菜单不在展开列表中则添加
+                    this.openedList = []; // 清空所有已展开的菜单
+                    this.openedList.push(parentIndex); // 只展开当前父级菜单
+                } else {
+                    // 如果是顶级菜单，直接设置展开状态
+                    this.openedList = [index];
+                }
+            },
+            // 接子组件传参
+            handleComponentChange(paramData) {
+                this.currentComponent = paramData.component
+                this.propsData = paramData.data
+                console.log("params=", this.propsData)
+            },
+            // 退出登录
+            logout(){
+                // 删除cookie
+                document.cookie = 'login_flag=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                // 重定向到登录页面
+                window.location.href = '/login';
+            },
+        },
+    })
+</script>
+
+</body>
+
+</html>

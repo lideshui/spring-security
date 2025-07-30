@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--添加父工程坐标-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.7.RELEASE</version>
+    </parent>
+
+    <groupId>com.study</groupId>
+    <artifactId>spring-security</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!--Java编译版本-->
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <!--项目构建源编码-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--版本控制-->
+        <java.version>8</java.version>
+        <!--第三方依赖版本控制-->
+        <druid.version>1.2.8</druid.version>
+        <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <pagehelper.boot.version>1.4.1</pagehelper.boot.version>
+    </properties>
+
+
+    <dependencies>
+        <!-- Spring Boot Starter Web 依赖，提供构建 Web 应用所需的全部依赖，包括 Spring MVC 和 Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Boot DevTools 依赖，用于开发时提供自动重启、快速应用上下文重新加载等功能，仅在运行时生效，且为可选依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Lombok 依赖，用于简化 Java 类的编写，通过注解减少样板代码，如 getter/setter 方法等，为可选依赖 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot Starter Test 依赖，提供测试 Spring Boot 应用所需的全部依赖，包括 JUnit 和 Mockito 等，仅在测试时生效 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Springfox Swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!-- Springfox Swagger UI -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!-- Knife4j -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+
+        <!-- Hutool 工具类依赖 -->
+        <!-- Hutool-all 依赖，提供一系列常用的 Java 工具类，如日期、字符串、集合、IO 操作等 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.6.1</version>
+        </dependency>
+
+        <!-- PostgreSQL 数据库驱动依赖 -->
+        <!-- PostgreSQL 驱动包，用于连接和操作 PostgreSQL 数据库，仅在运行时生效 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Druid 数据库连接池依赖 -->
+        <!-- Druid Spring Boot Starter 依赖，提供 Druid 数据库连接池的支持 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version> <!-- 这里的版本需要从项目的属性中获取 -->
+        </dependency>
+
+        <!-- MyBatis Spring Boot Starter 依赖 -->
+        <!-- MyBatis Spring Boot Starter 依赖，提供 MyBatis ORM 框架与 Spring Boot 的集成支持 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot.version}</version> <!-- 这里的版本需要从项目的属性中获取 -->
+        </dependency>
+
+        <!--mybatis-plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!-- PageHelper 分页插件依赖 -->
+        <!-- PageHelper Spring Boot Starter 依赖，提供 MyBatis 分页插件的支持 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.boot.version}</version> <!-- 这里的版本需要从项目的属性中获取 -->
+        </dependency>
+
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Redis 相关依赖 -->
+        <!-- Spring Boot Starter Data Redis 依赖，提供与 Redis 数据库交互的 Spring Data 支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- Apache Commons Pool 2 依赖，用于 Redis 连接池管理 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <!-- 阿里JSON解析器 -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <!-- 设置构建输出的最终名称 -->
+        <finalName>material-management</finalName>
+
+        <plugins>
+            <!-- Java编译器插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <!-- 设置源代码和目标Java版本为1.8 -->
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <!-- 设置文件编码为UTF-8 -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Spring Boot Maven插件，用于构建可执行的jar或war文件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.7.RELEASE</version>
+                <configuration>
+                    <!-- 指定Spring Boot应用的主类 -->
+                    <mainClass>com.cps.material.StartApp</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <!-- 在package阶段执行repackage目标，添加必需的依赖项和类重新打包应用，生成独立可执行的jar文件 -->
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Surefire插件，用于运行单元测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18</version>
+                <configuration>
+                    <!-- 忽略测试失败，继续构建 -->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- 跳过测试执行 -->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- classfinal-maven-plugin插件，用于加密和混淆Java类文件 -->
+            <plugin>
+                <groupId>net.roseboy</groupId>
+                <artifactId>classfinal-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <!-- 设置加密密码（注意：加密后pom.xml会被删除，密码不会泄露在jar中） -->
+                    <password>1234567</password>
+                    <!-- 指定需要加密和混淆的包名 -->
+                    <packages>com.cps.material</packages>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- 在package阶段执行classFinal目标 -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>classFinal</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

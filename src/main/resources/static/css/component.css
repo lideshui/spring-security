@@ -1,0 +1,90 @@
+.component {
+    .title{
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #333333;
+    }
+
+    .nav {
+        margin-top: 20px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .el-divider--horizontal {
+        display: block;
+        height: 1px;
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    .nav-title {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 50px;
+    }
+
+    .nav-middle {
+        display: flex;
+    }
+
+    .nav-middle-info {
+        padding-right: 0px;
+    }
+
+    .nav-middle-title {
+        font-size: 12px;
+        color: #666666;
+    }
+
+    .nav-middle-value {
+        font-size: 14px;
+        font-weight: bold;
+        color: #666666;
+        padding-top: 5px;
+        text-align: center;
+    }
+
+    .nav-middle-line {
+        margin: 10px 20px;
+        height: 30px;
+    }
+
+    .nav-right {
+        text-align: right;
+        line-height: 50px;
+    }
+
+    .search-container {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .container > * {
+        margin: 0 10px; /* 手动设置间隔 */
+    }
+
+    .search-item {
+        width: 150px;
+        margin-right: 10px;
+    }
+
+    /* 修改所有表格表头 */
+    .el-table__header th {
+        background-color: #fafafb !important; /* 浅灰色示例 */
+        color: #606266; /* 文字颜色可选调整 */
+    }
+
+    .pagination-container {
+        float: right;
+        margin: 15px 0; /* 根据实际间距调整 */
+    }
+
+    .link-container {
+        margin-right: 15px;
+    }
+
+}
