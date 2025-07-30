@@ -5,12 +5,12 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: org.postgresql.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 主库数据源
       master:
-        url: jdbc:postgresql://47.120.67.11:25432/cps_material?currentSchema=public&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-        username: postgres
+        url: jdbc:mysql://47.120.67.11:23306/spring-security?serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&useSSL=false&characterEncoding=UTF-8
+        username: root
         password: A1helloworld.
       # 从库数据源
       slave:

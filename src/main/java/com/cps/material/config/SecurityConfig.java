@@ -1,4 +1,4 @@
-package com.cps.material.config.security;
+package com.cps.material.config;
 
 import com.cps.material.filter.JwtAuthenticationFilter;
 import com.cps.material.security.CustomUserDetailsService;
@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/auth/passport/login", "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
+                .antMatchers("/api/auth/login", "/api/auth/login", "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

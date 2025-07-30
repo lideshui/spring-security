@@ -1,4 +1,4 @@
-package com.cps.material.common.util;
+package com.cps.material.config;
 
 /**
  * Redis常量配置类

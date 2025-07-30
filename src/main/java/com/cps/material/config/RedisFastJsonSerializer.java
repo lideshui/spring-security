@@ -1,4 +1,4 @@
-package com.cps.material.common.util;
+package com.cps.material.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONReader;
@@ -13,13 +13,13 @@ import java.nio.charset.Charset;
  * 
  * @author ruoyi
  */
-public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T>
+public class RedisFastJsonSerializer<T> implements RedisSerializer<T>
 {
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     private Class<T> clazz;
 
-    public FastJson2JsonRedisSerializer(Class<T> clazz)
+    public RedisFastJsonSerializer(Class<T> clazz)
     {
         super();
         this.clazz = clazz;

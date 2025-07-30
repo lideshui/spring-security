@@ -1,6 +1,5 @@
-package com.cps.material.common.util;
+package com.cps.material.config;
 
-import com.cps.material.common.util.FastJson2JsonRedisSerializer;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +25,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setConnectionFactory(connectionFactory);
 
         // fastjson 序列化器（需自定义，参考下方说明）
-        FastJson2JsonRedisSerializer<Object> serializer = new FastJson2JsonRedisSerializer<>(Object.class);
+        RedisFastJsonSerializer<Object> serializer = new RedisFastJsonSerializer<>(Object.class);
 
         // key 和 hashKey 使用字符串序列化
         template.setKeySerializer(new StringRedisSerializer());

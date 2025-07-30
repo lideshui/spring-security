@@ -1,14 +1,13 @@
 package com.cps.material.service;
 
 import cn.hutool.core.util.IdUtil;
-import com.cps.material.common.util.RedisConst;
+import com.cps.material.config.RedisConst;
 import com.cps.material.model.LoginUser;
+import com.cps.material.model.SysUser;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -44,7 +43,7 @@ public class AuthService {
      * @param loginUser 用户信息
      * @return 生成的 JWT 令牌字符串
      */
-    public String createToken(LoginUser loginUser) {
+    public String createToken(SysUser loginUser) {
         // 1. 生成一个唯一的、用于标识本次登录会话的 UUID
         String token = IdUtil.fastUUID();
         loginUser.setToken(token);

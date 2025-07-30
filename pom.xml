@@ -98,6 +98,12 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- MySQL的依赖 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
         <!-- Druid 数据库连接池依赖 -->
         <!-- Druid Spring Boot Starter 依赖，提供 Druid 数据库连接池的支持 -->
         <dependency>

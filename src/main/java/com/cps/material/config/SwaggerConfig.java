@@ -1,4 +1,4 @@
-package com.cps.material.config.swagger;
+package com.cps.material.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

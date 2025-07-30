@@ -5,21 +5,16 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cps.material.common.result.Result;
 import com.cps.material.common.util.IpUtil;
 import com.cps.material.common.util.JwtTokenUtil;
-import com.cps.material.common.util.RedisConst;
+import com.cps.material.config.RedisConst;
 import com.cps.material.mapper.UserInfoMapper;
 import com.cps.material.model.UserInfo;
 import com.cps.material.service.UserInfoService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**

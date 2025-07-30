@@ -1,4 +1,4 @@
-package com.cps.material.config.druid;
+package com.cps.material.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
