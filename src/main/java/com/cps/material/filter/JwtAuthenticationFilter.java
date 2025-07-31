@@ -3,6 +3,7 @@ package com.cps.material.filter;
 import com.cps.material.common.util.JwtTokenUtil;
 import com.cps.material.model.LoginUser;
 import com.cps.material.service.AuthService;
+import com.cps.material.vo.LoginResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -61,7 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authService.getToken(request);
         System.out.println("==========================================token " + token);
         if (token != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            LoginUser loginUser = authService.checkToken(token);
+            LoginResultVO loginUser = authService.checkToken(token);
             System.out.println("==========================================loginUser " + loginUser);
             if (loginUser != null) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(

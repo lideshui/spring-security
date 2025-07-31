@@ -3,16 +3,18 @@ package com.cps.material.model;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * 用户登录记录表实体类
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "用户登录记录表")
 @TableName("sys_user_login")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SysUserLogin extends BaseEntity {
 
     @ApiModelProperty(value = "登录用户名")

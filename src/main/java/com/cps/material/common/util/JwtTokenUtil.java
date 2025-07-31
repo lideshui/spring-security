@@ -4,7 +4,6 @@ package com.cps.material.common.util;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 
 @Component

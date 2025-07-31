@@ -3,16 +3,18 @@ package com.cps.material.model;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 /**
  * 用户表实体类
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "用户表")
 @TableName("sys_user")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class SysUser extends BaseEntity {
 
     @ApiModelProperty(value = "用户名")
@@ -38,5 +40,9 @@ public class SysUser extends BaseEntity {
     @ApiModelProperty(value = "状态：0禁用，1启用")
     @TableField("status")
     private Integer status;
+
+    @ApiModelProperty(value = "Token")
+    @TableField(exist = false)
+    private String token;
 
 }

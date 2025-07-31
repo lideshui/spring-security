@@ -7,15 +7,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value = "FeiShuAnalysis", description = "用户类")
+@ApiModel(value = "LoginUserVO", description = "登录用户类")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class LoginUserVO {
     @ApiModelProperty(value = "用户名")
     private String username;
 
     @ApiModelProperty(value = "密码")
     private String password;
+
+    @ApiModelProperty(value = "验证码")
+    private String code;
 }

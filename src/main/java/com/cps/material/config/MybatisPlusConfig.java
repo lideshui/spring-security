@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.cps.material.mapper")
+@MapperScan("com.cps.material.com.cps.material.mapper")
 public class MybatisPlusConfig {
 
     /**

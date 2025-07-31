@@ -1,11 +1,10 @@
 package com.cps.material.controller;
 
 import com.cps.material.common.result.Result;
-import com.cps.material.model.SysUser;
 import com.cps.material.service.AuthService;
 import com.cps.material.service.SysUserService;
+import com.cps.material.vo.LoginUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.*;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,29 +19,21 @@ public class AuthController {
     private AuthService authService;
 
     /**
-     * 用户登录接口，也可提供给PC端小程序端使用
+     * 用户登录接口，也可提供给PC端小程序端使用，返回 JWT Token
      */
     @PostMapping("/login")
-    public Result login(@RequestBody SysUser sysUser, HttpServletRequest request){
-        // 用户认证逻辑
-        SysUser loginUser = sysUserService.userAuth(sysUser);
-        if (loginUser != null) {
-            return Result.ok(authService.createToken(loginUser));
-        }else {
-            return Result.fail().message("用户名或密码错误");
-        }
+    public Result<String> login(@RequestBody LoginUserVO loginUser, HttpServletRequest request) {
+        String token = authService.login(loginUser.getUsername(), loginUser.getPassword(), request);
+        return Result.ok(token);
     }
 
     /**
      * 用户退出系统
-     *
-     * @param token
      */
     @GetMapping("/logout")
-    public Result logout(@RequestHeader("token") String token){
-        userInfoService.logout(token);
-        return Result.ok();
+    public Result<String> logout(@RequestHeader("token") String token) throws Exception {
+        authService.logout(token);
+        return Result.ok("用户已退出系统");
     }
-
 
 }

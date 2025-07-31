@@ -1,4 +1,4 @@
-package mapper;
+package com.cps.material.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cps.material.model.SysUser;

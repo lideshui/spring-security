@@ -11,6 +11,6 @@ public interface SysUserService extends IService<SysUser> {
     /**
      * 用户验证 验证用户名和密码是否正确
      */
-    SysUser userAuth(SysUser sysUser);
+    SysUser userAuth(String username, String password);
 
 }

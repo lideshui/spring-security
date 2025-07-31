@@ -3,7 +3,7 @@ package com.cps.material.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cps.material.common.result.Result;
-import com.cps.material.common.util.IpUtil;
+import com.cps.material.common.util.UserAgentUtils;
 import com.cps.material.common.util.JwtTokenUtil;
 import com.cps.material.config.RedisConst;
 import com.cps.material.mapper.UserInfoMapper;
@@ -50,7 +50,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         String token = this.refreshToken(userInfo);
 
         // 3.记录登录信息
-        String ipAddress = IpUtil.getIpAddress(request);
+        String ipAddress = UserAgentUtils.getIpAddress(request);
         // 根据IP获取用户所在城市。这里先写死，需要调用第三方SDK，比如百度API⚠️
         HashMap<String, String> userRedis = new HashMap<>();
         userRedis.put("userId", userInfo.getId().toString());
