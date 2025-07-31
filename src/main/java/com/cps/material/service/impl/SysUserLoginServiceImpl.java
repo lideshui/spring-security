@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class SysUserLoginServiceImpl extends ServiceImpl<SysUserLoginMapper, SysUserLogin> implements SysUserLoginService {
 
-
     @Override
     public SysUserLogin addLoginUser(SysUser sysUser, HttpServletRequest request) {
         // 创建登录记录对象

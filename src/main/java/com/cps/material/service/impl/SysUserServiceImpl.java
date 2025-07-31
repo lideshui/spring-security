@@ -36,4 +36,23 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         //根据查询对象获取查询结果
         return this.getOne(queryWrapper);
     }
+
+    /**
+     * 通过用户名查询用户
+     */
+    @Override
+    public SysUser findByUsername(String username){
+        // 构建查询条件
+        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+
+        //参数wrapper是当前的查询对象，分别根据名字或邮箱或电话登陆
+        queryWrapper.and(wrapper -> {
+            wrapper.or().eq(SysUser::getUserName, username)
+                    .or().eq(SysUser::getEmail, username)
+                    .or().eq(SysUser::getPhone, username);
+        });
+
+        //根据查询对象获取查询结果
+        return this.getOne(queryWrapper);
+    }
 }

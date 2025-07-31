@@ -41,8 +41,8 @@ public class SysUser extends BaseEntity {
     @TableField("status")
     private Integer status;
 
-    @ApiModelProperty(value = "Token")
+    @ApiModelProperty(value = "权限")
     @TableField(exist = false)
-    private String token;
+    private String role;
 
 }

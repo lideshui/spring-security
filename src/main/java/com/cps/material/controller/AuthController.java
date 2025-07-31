@@ -1,8 +1,7 @@
 package com.cps.material.controller;
 
 import com.cps.material.common.result.Result;
-import com.cps.material.service.AuthService;
-import com.cps.material.service.SysUserService;
+import com.cps.material.security.AuthService;
 import com.cps.material.vo.LoginUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
-    @Autowired
-    private SysUserService sysUserService;
 
     @Autowired
     private AuthService authService;

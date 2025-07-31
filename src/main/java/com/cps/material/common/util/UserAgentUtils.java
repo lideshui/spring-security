@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * 解析客户端信息类
+ */
 @Slf4j
 public class UserAgentUtils {
 

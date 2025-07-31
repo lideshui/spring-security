@@ -1,10 +1,11 @@
-package com.cps.material.service;
+package com.cps.material.security;
 
 import cn.hutool.core.util.IdUtil;
 import com.cps.material.config.RedisConst;
-import com.cps.material.model.LoginUser;
 import com.cps.material.model.SysUser;
 import com.cps.material.model.SysUserLogin;
+import com.cps.material.service.SysUserLoginService;
+import com.cps.material.service.SysUserService;
 import com.cps.material.vo.LoginResultVO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -36,7 +37,6 @@ public class AuthService {
 
     @Autowired
     private SysUserLoginService sysUserLoginService;
-
 
     // JWT 签名密钥 从配置文件读取
     @Value("${jwt.secret}")
@@ -101,13 +101,13 @@ public class AuthService {
         // 1. 更新登录时间
         loginResult.setLoginTime(System.currentTimeMillis());
         // 2. 计算过期时间 (毫秒)
-        loginResult.setExpireTime(loginResult.getLoginTime() + RedisConst.USER_LOGIN_TIMEOUT * 1000L); // 注意：RedisConst 是秒，这里转为毫秒
+        loginResult.setExpireTime(loginResult.getLoginTime() + RedisConst.AUTH_TIMEOUT * 1000L); // 注意：RedisConst 是秒，这里转为毫秒
         // 3. 根据 token 生成 Redis Key (使用 RedisConst)
         String userKey = getTokenKey(loginResult.getCacheToken());
         // 4. 将 loginUser 对象存入 Redis
         redisTemplate.opsForValue().set(userKey, loginResult);
         // 5. 单独设置过期时间 (使用 RedisConst 定义的秒数)
-        redisTemplate.expire(userKey, RedisConst.USER_LOGIN_TIMEOUT, TimeUnit.SECONDS);
+        redisTemplate.expire(userKey, RedisConst.AUTH_TIMEOUT, TimeUnit.SECONDS);
     }
 
     /**
@@ -122,7 +122,7 @@ public class AuthService {
         // 加入签发时间和过期时间到 JWT Claims
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        Date expiryDate = new Date(nowMillis + RedisConst.USER_LOGIN_TIMEOUT * 1000L);
+        Date expiryDate = new Date(nowMillis + RedisConst.AUTH_TIMEOUT * 1000L);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -161,10 +161,7 @@ public class AuthService {
                 if (token != null) {
                     String userKey = getTokenKey(token);
                     // 从 Redis 获取 loginUser 对象
-                    System.out.println("==========================================userKeyyy " + userKey);
-                    System.out.println("==========================================redisTemplate.opsForValue().get(userKey) " + redisTemplate.opsForValue().get(userKey));
                     loginUser = (LoginResultVO) redisTemplate.opsForValue().get(userKey);
-                    System.out.println("==========================================Redis-LoginUser " + loginUser);
                 }
             }
         } catch (ExpiredJwtException e) {
@@ -229,24 +226,21 @@ public class AuthService {
      * @return Redis Key (格式: user:uuid:info)
      */
     private String getTokenKey(String uuid) {
-        return LOGIN_USER_KEY + uuid;
+        return RedisConst.AUTH_PREFIX + uuid + RedisConst.AUTH_SUFFIX;
     }
 
     /**
      * 强制注销用户（退出登录）
      * 删除 Redis 中的用户信息，使 Token 立即失效
      *
-     * @param token 从 JWT Claims 中解析出的唯一标识 (fastUUID)
+     * @param jwtToken 从 JWT Claims 中解析出的唯一标识 (fastUUID)
      */
-    public void logout(String token) throws Exception {
-        if (token != null && !token.isEmpty()) {
-            Claims claims = parseToken(token);
-            String token2 = (String) claims.get(LOGIN_USER_KEY);
-            System.out.println("==============================1 " + token);
-            System.out.println("==============================11 " + token2);
-            String userKey = getTokenKey(token2);
-            System.out.println("==============================2 " + userKey);
-            redisTemplate.delete(userKey);
+    public void logout(String jwtToken) throws Exception {
+        if (jwtToken != null && !jwtToken.isEmpty()) {
+            Claims claims = parseToken(jwtToken);
+            String token = (String) claims.get(LOGIN_USER_KEY);
+            String cacheKey = getTokenKey(token);
+            redisTemplate.delete(cacheKey);
         }
     }
 

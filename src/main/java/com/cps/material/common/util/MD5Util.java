@@ -3,7 +3,9 @@ package com.cps.material.common.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
+/**
+ * MD5加密类
+ */
 public final class MD5Util {
 
     public static String encrypt(String strSrc) {

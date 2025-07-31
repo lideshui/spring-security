@@ -1,14 +1,10 @@
 package com.cps.material.filter;
 
-import com.cps.material.common.util.JwtTokenUtil;
-import com.cps.material.model.LoginUser;
-import com.cps.material.service.AuthService;
+import com.cps.material.security.AuthService;
 import com.cps.material.vo.LoginResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,12 +16,6 @@ import java.io.IOException;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
 
     @Autowired
     private AuthService authService;

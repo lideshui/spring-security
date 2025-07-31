@@ -13,4 +13,9 @@ public interface SysUserService extends IService<SysUser> {
      */
     SysUser userAuth(String username, String password);
 
+    /**
+     * 通过用户名搜索用户
+     */
+    SysUser findByUsername(String username);
+
 }

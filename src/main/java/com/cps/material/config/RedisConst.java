@@ -20,8 +20,9 @@ public class RedisConst {
     public static final long ACQUISITION_REQUEST_TIMEOUT = 3 * 60; // 单位：秒
     public static final String ACQUISITION_REQUEST_SUFFIX = ":result";
 
-    //用户登录
-    public static final String USER_LOGIN_PREFIX = "user:";
-    public static final long USER_LOGIN_TIMEOUT = 60 * 60 * 24 * 30;
-    public static final String USER_LOGIN_SUFFIX = ":info";
+    // 鉴权信息缓存格式
+    public static final String AUTH_KEY = "auth:";
+    public static final String AUTH_PREFIX = "auth:";
+    public static final long AUTH_TIMEOUT = 24 * 60 * 60;
+    public static final String AUTH_SUFFIX = ":info";
 }
