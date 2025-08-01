@@ -43,7 +43,6 @@ swagger:
   pathMapping: /
 
 
-
 # 日志配置部分
 logging:
   # 配置不同包或类的日志级别

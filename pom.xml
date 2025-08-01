@@ -220,7 +220,7 @@
                 <version>2.3.7.RELEASE</version>
                 <configuration>
                     <!-- 指定Spring Boot应用的主类 -->
-                    <mainClass>com.cps.material.StartApp</mainClass>
+                    <mainClass>com.auth.StartApp</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -255,7 +255,7 @@
                     <!-- 设置加密密码（注意：加密后pom.xml会被删除，密码不会泄露在jar中） -->
                     <password>1234567</password>
                     <!-- 指定需要加密和混淆的包名 -->
-                    <packages>com.cps.material</packages>
+                    <packages>com.cps.auth</packages>
                 </configuration>
                 <executions>
                     <execution>
