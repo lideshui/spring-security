@@ -5,7 +5,7 @@ spring:
 
   # 应用配置部分
   application:
-    name: material-management  # 应用的名称，通常用于日志、监控等场景，以标识当前运行的应用
+    name: spring-security  # 应用的名称，通常用于日志、监控等场景，以标识当前运行的应用
 
   thymeleaf:
     mode: HTML5

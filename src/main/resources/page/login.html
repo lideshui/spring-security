@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-    <title>依斯倍物料匹配工具</title>
-    <link rel="icon" href="/img/favicon.ico">
+    <title>登录页面</title>
     <script type="text/javascript" src="/js/plugins/login.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/login.css" />
     <link rel="stylesheet" type="text/css" href="/css/plugins/all.min.css" />
@@ -21,22 +20,22 @@
 
     <!-- Logo区域 -->
     <div class="flex flex-col items-center mb-8">
-        <div class="text-5xl water-icon mb-2">
-            <img style="width: 50px; display: inline-block; margin-top: -5px" src="/img/cps.png"    >
-        </div>
-        <h1 class="text-2xl font-bold text-gray-800">依斯倍物料匹配工具</h1>
-        <p class="text-gray-500 mt-1">CPS Material Matching Tool</p>
+        <h1 class="text-2xl font-bold text-gray-800">鉴权登录测试</h1>
+        <p class="text-gray-500 mt-1">Spring Security Test</p>
     </div>
 
     <el-form :model="form" ref="form" :rules="rules" status-icon class="demo-ruleForm">
         <div class="login_input">用户名</div>
-        <el-form-item label="" prop="username">
-            <el-input placeholder="请输入用户名" v-model="form.username" ></el-input>
+        <el-form-item label="" prop="userName">
+            <el-input placeholder="请输入用户名" v-model="form.userName" ></el-input>
         </el-form-item>
         <div class="login_input">密码</div>
         <el-form-item label="" prop="password">
             <el-input placeholder="请输入密码" type="password" v-model="form.password" autocomplete="off"></el-input>
         </el-form-item>
+        <div style="text-align: right">
+            <el-link href="https://element.eleme.io" target="_blank"  type="primary">注册用户</el-link>
+        </div>
         <el-button style="width: 100%" type="primary" @click="submitForm">登录</el-button>
     </el-form>
 
@@ -53,11 +52,11 @@
         el: '#vue',
         data: {
             form: {
-                username: '',
+                userName: '',
                 password: '',
             },
             rules: {
-                username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
+                userName: [{required: true, message: '请输入用户名', trigger: 'blur'}],
                 password: [{required: true, message: '请输入密码', trigger: 'blur'}],
             },
         },
@@ -66,16 +65,16 @@
             submitForm() {
                 this.$refs['form'].validate((valid) => {
                     if (valid) {
-                        axios.post('/api/login', this.form)
+                        axios.post('/api/auth/login', this.form)
                             .then(response => {
-                                if(response.data.code == 200){
+                                if(response.data.code === 200){
                                     this.$message.success("登录成功!");
                                     // 登录成功，设置 Cookie
-                                    document.cookie = `login_flag=success_login; max-age=${3 * 24 * 60 * 60}; path=/`;
-                                    // 登录成功后重定向到计划页
-                                    window.location.href = '/';
+                                    document.cookie = `token=${response.data.data}; max-age=${3 * 60 * 60}; path=/`;
+                                    // 查询当前登录用户信息
+                                    this.getLoginUser()
                                 }else {
-                                    this.$message.error("登录失败，用户名或密码错误!");
+                                    this.$message.error(response.data.data);
                                 }
                             })
                             .catch(error => {
@@ -85,6 +84,22 @@
                         console.log('表单验证失败');
                         return false;
                     }
+                });
+            },
+            // 获取当前登录用户信息
+            async getLoginUser() {
+                axios.get("/api/auth/getLoginUser", {
+                    params: {}
+                }).then(response => {
+                    if (response.data.code === 200) {
+                        localStorage.setItem("user", JSON.stringify(response.data.data));
+                        // 登录成功后重定向到计划页
+                        window.location.href = '/';
+                    } else {
+                        this.$message.error(response.data.data);
+                    }
+                }).catch(error => {
+                    this.$message.error("获取登录用户信息异常: " + error.message);
                 });
             },
         },

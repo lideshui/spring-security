@@ -50,7 +50,7 @@ public class AuthService {
     private SysUserRecordService sysUserRecordService;
 
     // JWT 签名密钥 从配置文件读取
-    @Value("${jwt.secret}")
+    @Value("${security.secret}")
     private String secret;
 
     // 常量：用于在 JWT Claims 中存储用户唯一标识的 Key
@@ -167,7 +167,7 @@ public class AuthService {
                 String token = (String) claims.get(LOGIN_USER_KEY);
                 if (token != null) {
                     String userKey = getTokenKey(token);
-                    // 从 Redis 获取 loginUser 对象
+                    // 从 Redis 获取 loginUser 对象auth:d70a13a8-c49b-4911-8a16-e15cff27d496:info
                     loginUser = (LoginUser) redisTemplate.opsForValue().get(userKey);
                 }
             }

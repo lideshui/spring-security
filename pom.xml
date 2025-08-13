@@ -191,8 +191,22 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-    </dependencies>
 
+        <!--web服务相关-->
+        <!--WEB页面 thymeleaf-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--web服务相关-->
+        <!-- template依赖 -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.31</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <!-- 设置构建输出的最终名称 -->
