@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- saved from url=(0264)https://space-static.coze.cn/7522451603347505449/%E6%B0%B4%E5%A4%84%E7%90%86%E7%99%BB%E5%BD%95%E9%A1%B5%E8%AE%BE%E8%AE%A1%28%E5%86%85%E7%BD%91%E7%89%88%29-d989d0fc35.html?sign=1757666559-1947231bbc-0-c8bdc3ed097067601ac64a69f41d2b337a4562dfd5d73ab8e6f6c1f6613ab4e7 -->
 <html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -200,13 +201,6 @@
             box-shadow: 0 4px 6px -1px rgba(29, 78, 216, 0.2);
         }
 
-        .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
-            color: #eae7e7;
-            background-color: #5688f6 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(29, 78, 216, 0.2);
-        }
-
         .footer {
             margin-top: 30px;
             padding-top: 20px;
@@ -236,7 +230,7 @@
 <body>
 <div id="vue" class="login-container">
     <div class="logo-section">
-        <!-- 内联SVG图标 -->
+        <!-- 内联SVG水图标 -->
         <svg t="1755138872360" class="login-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="" p-id="42725" width="200" height="200"><path d="M765.4 537.4c-0.4-73.4 32.8-128.8 100-169.6-37.6-53.8-94.4-83.4-169.4-89.2-71-5.6-148.6 41.4-177 41.4-30 0-98.8-39.4-152.8-39.4C254.6 282.4 136 369.6 136 547q0 78.6 28.8 162.4c25.6 73.4 118 253.4 214.4 250.4 50.4-1.2 86-35.8 151.6-35.8 63.6 0 96.6 35.8 152.8 35.8 97.2-1.4 180.8-165 205.2-238.6-130.4-61.4-123.4-180-123.4-183.8z m-113.2-328.4c54.6-64.8 49.6-123.8 48-145-48.2 2.8-104 32.8-135.8 69.8-35 39.6-55.6 88.6-51.2 143.8 52.2 4 99.8-22.8 139-68.6z" p-id="42726" fill="#707070"></path></svg>
         <h1>B612小行星管理系统</h1>
         <p class="system-name">B612 Asteroid Management System</p>
@@ -262,11 +256,11 @@
         </el-form-item>
 
         <div class="options">
-            <el-link type="primary" :underline="false">忘记密码?</el-link>
-            <el-link type="primary" :underline="false">注册新用户</el-link>
+            <a href="https://space-static.coze.cn/7522451603347505449/%E6%B0%B4%E5%A4%84%E7%90%86%E7%99%BB%E5%BD%95%E9%A1%B5%E8%AE%BE%E8%AE%A1%28%E5%86%85%E7%BD%91%E7%89%88%29-d989d0fc35.html?sign=1757666559-1947231bbc-0-c8bdc3ed097067601ac64a69f41d2b337a4562dfd5d73ab8e6f6c1f6613ab4e7#" class="forgot-password">忘记密码?</a>
+            <a href="https://space-static.coze.cn/7522451603347505449/%E6%B0%B4%E5%A4%84%E7%90%86%E7%99%BB%E5%BD%95%E9%A1%B5%E8%AE%BE%E8%AE%A1%28%E5%86%85%E7%BD%91%E7%89%88%29-d989d0fc35.html?sign=1757666559-1947231bbc-0-c8bdc3ed097067601ac64a69f41d2b337a4562dfd5d73ab8e6f6c1f6613ab4e7#" class="forgot-password">注册新用户</a>
         </div>
 
-        <el-button class="login-btn" native-type="submit" :disabled="isLogin">登录</el-button>
+        <el-button class="login-btn" native-type="submit">登录</el-button>
     </el-form>
 
     <div class="footer">
@@ -284,8 +278,6 @@
     let item = new Vue({
         el: '#vue',
         data: {
-            isLogin: false,
-            showPassword: false,
             form: {
                 userName: '',
                 password: '',
@@ -300,7 +292,6 @@
             submitForm() {
                 this.$refs['form'].validate((valid) => {
                     if (valid) {
-                        this.isLogin = true
                         axios.post('/api/auth/login', this.form)
                             .then(response => {
                                 if(response.data.code === 200){
@@ -315,9 +306,7 @@
                             })
                             .catch(error => {
                                 this.$message.error("登录失败: " + error.message);
-                            }).finally(()=>{
-                                this.isLogin = false
-                        });
+                            });
                     } else {
                         console.log('表单验证失败');
                         return false;

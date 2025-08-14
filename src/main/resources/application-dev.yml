@@ -107,6 +107,7 @@ security:
       /swagger-ui.html,
       /favicon.ico,
       /login/**,
+      /register/**,
       /css/**,
       /js/**,
       /img/**

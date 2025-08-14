@@ -20,6 +20,12 @@ public class WebController {
         return "login";  // 返回登录页面
     }
 
+    @ApiOperation("注册页")
+    @GetMapping("/register")
+    public String register(HttpServletRequest request, Model model) {
+        return "register";  // 返回登录页面
+    }
+
     @ApiOperation("首页")
     @GetMapping({"/"})
     public String index(HttpServletRequest request, Model model) {
