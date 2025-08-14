@@ -253,6 +253,7 @@
         </el-form-item>
 
         <el-form-item prop="password">
+            <label style="margin-bottom: 0">密码</label>
             <el-input placeholder="请输入密码" v-model="form.password" :type="showPassword ? 'text' : 'password'" autocomplete="off">
                 <template slot="prefix">
                     <svg t="1755138176236" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="41173" width="200" height="200"><path d="M864 448h-48v-144C816 136.4 679.6 0 512 0S208 136.4 208 304v144H160c-53 0-96 43-96 96v384c0 53 43 96 96 96h704c53 0 96-43 96-96V544c0-53-43-96-96-96z m-208 0H368v-144c0-79.4 64.6-144 144-144s144 64.6 144 144v144z" p-id="41174" fill="#707070"></path></svg>
@@ -263,7 +264,7 @@
 
         <div class="options">
             <el-link type="primary" :underline="false">忘记密码?</el-link>
-            <el-link type="primary" :underline="false">注册新用户</el-link>
+            <el-link href="/register"  type="primary" :underline="false">注册新用户</el-link>
         </div>
 
         <el-button class="login-btn" native-type="submit" :disabled="isLogin">登录</el-button>
